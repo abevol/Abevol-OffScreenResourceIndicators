@@ -1,0 +1,17 @@
+{
+	"name": "OffScreenResourceIndicators",
+	"namespace": "Gelulacus",
+	"version_number": "1.0.0",
+	"description": "Adds off screen resource indicators.",
+	"website_url": "https://",
+	"dependencies": [],
+	"extra": {
+		"godot": {
+			"incompatibilities": [],
+			"authors": ["Gelulacus"],
+			"compatible_mod_loader_version": ["3.0.0"],
+			"compatible_game_version": ["3.1.0"],
+			"config_defaults": {}
+		}
+	}
+}
