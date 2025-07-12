@@ -1,17 +1,34 @@
 {
-	"name": "OffScreenResourceIndicators",
-	"namespace": "Gelulacus",
-	"version_number": "1.0.0",
-	"description": "Adds off screen resource indicators.",
-	"website_url": "https://",
 	"dependencies": [],
+	"description": "Adds off screen resource indicators.\nThis is the V4-compatible version.",
 	"extra": {
 		"godot": {
+			"authors": [
+				"Abevol",
+				"Gelulacus"
+			],
+			"compatible_game_version": [
+				"4.2.2",
+				"3.1.0"
+			],
+			"compatible_mod_loader_version": [
+				"7.0.0",
+				"6.2.0",
+				"3.0.0"
+			],
+			"config_schema": {
+
+			},
+			"description_rich": "",
+			"image": null,
 			"incompatibilities": [],
-			"authors": ["Gelulacus"],
-			"compatible_mod_loader_version": ["3.0.0"],
-			"compatible_game_version": ["3.1.0"],
-			"config_defaults": {}
+			"load_before": [],
+			"optional_dependencies": [],
+			"tags": []
 		}
-	}
+	},
+	"name": "OffScreenResourceIndicators",
+	"namespace": "Abevol",
+	"version_number": "1.0.0",
+	"website_url": "https://github.com/abevol/OffScreenResourceIndicators"
 }
