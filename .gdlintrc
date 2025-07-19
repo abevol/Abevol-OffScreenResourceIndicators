@@ -15,7 +15,7 @@ class-definitions-order:
 - others
 class-load-variable-name: (([A-Z][a-z0-9]*)+|_?[a-z][a-z0-9]*(_[a-z0-9]+)*)
 class-name: ([A-Z][a-z0-9]*)+
-class-variable-name: (_?[a-z][a-z0-9]*(_[a-z0-9]+)*|[a-z][a-zA-Z0-9]*)
+class-variable-name: (_?[a-z][a-z0-9]*(_[a-z0-9]+)*|[a-z][a-zA-Z0-9]*|_?[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)
 comparison-with-itself: null
 constant-name: _?[A-Z][A-Z0-9]*(_[A-Z0-9]+)*
 disable: []
@@ -27,7 +27,7 @@ excluded_directories: !!set
 expression-not-assigned: null
 function-argument-name: (_?[a-z][a-z0-9]*(_[a-z0-9]+)*|[a-z][a-zA-Z0-9]*)
 function-arguments-number: 10
-function-name: (_on_([A-Z][a-z0-9]*)+(_[a-z0-9]+)*|_?[a-z][a-z0-9]*(_[a-z0-9]+)*|[a-z][a-zA-Z0-9]*)
+function-name: (_on_[A-Z][a-zA-Z0-9_]*|_?[a-z][a-z0-9]*(_[a-z0-9]+)*|_?[a-z]+[A-Z][a-zA-Z0-9]*)
 function-preload-variable-name: ([A-Z][a-z0-9]*)+
 function-variable-name: '([a-z][a-z0-9]*(_[a-z0-9]+)*|[a-z][a-zA-Z0-9]*)'
 load-constant-name: (([A-Z][a-z0-9]*)+|_?[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)

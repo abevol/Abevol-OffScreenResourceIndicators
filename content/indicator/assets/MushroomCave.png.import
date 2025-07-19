@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn6dcm16ayge3"
-path="res://.godot/imported/Indicator.png-7213be6646a9ec6b1010f452e4575dae.ctex"
+uid="uid://bf60ech14ghbw"
+path="res://.godot/imported/MushroomCave.png-b96a4cc0307b358ff0735df0f7a6c229.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.png"
-dest_files=["res://.godot/imported/Indicator.png-7213be6646a9ec6b1010f452e4575dae.ctex"]
+source_file="res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/assets/MushroomCave.png"
+dest_files=["res://.godot/imported/MushroomCave.png-b96a4cc0307b358ff0735df0f7a6c229.ctex"]
 
 [params]
 

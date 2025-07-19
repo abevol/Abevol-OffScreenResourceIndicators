@@ -1,4 +1,8 @@
 {
+	"name": "OffScreenResourceIndicators",
+	"namespace": "Abevol",
+	"version_number": "1.1.0",
+	"website_url": "https://github.com/abevol/OffScreenResourceIndicators",
 	"dependencies": [],
 	"description": "Adds off screen resource indicators.\nThis is the V4-compatible version.",
 	"extra": {
@@ -17,7 +21,188 @@
 				"3.0.0"
 			],
 			"config_schema": {
-
+				"$schema": "https://json-schema.org/draft/2020-12/schema",
+				"title": "Config",
+				"description": "Config for this Mod",
+				"type": "object",
+				"properties": {
+					"show_debug_info": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_bomb_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_chinese_new_year_dragon_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_cobalt_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_drillbert_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_drone_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_halloween_skeleton_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_helmet_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_iron_tree_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_mushroom_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_nest_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_portal_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_scanner_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_seed_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_teleport_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_water_cave_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_follow_eye_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_gadget_chamber_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_gift_chamber_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_power_core_chamber_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_relic_chamber_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_relic_switch_chamber_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_cave_bomb_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_drillbot_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_extractor_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_mine_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_spore_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_teleporter_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_egg_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_packed_drop_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_seed_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_treat_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_iron_drop_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_sand_drop_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_water_drop_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_border_tile_indicator": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_iron_tile_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_sand_tile_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_water_tile_indicator": {
+						"type": "boolean",
+						"default": true
+					},
+					"show_gadget_tile_indicator": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_power_core_tile_indicator": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_relic_tile_indicator": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_relic_switch_tile_indicator": {
+						"type": "boolean",
+						"default": false
+					},
+					"show_nest_tile_indicator": {
+						"type": "boolean",
+						"default": true
+					}
+				}
 			},
 			"description_rich": "",
 			"image": null,
@@ -26,9 +211,5 @@
 			"optional_dependencies": [],
 			"tags": []
 		}
-	},
-	"name": "OffScreenResourceIndicators",
-	"namespace": "Abevol",
-	"version_number": "1.0.0",
-	"website_url": "https://github.com/abevol/OffScreenResourceIndicators"
+	}
 }

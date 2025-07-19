@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buqf3rx3s2tqu"
-path="res://.godot/imported/Unknown.png-9c77ca833653e5c490f0c7cfe4364e0c.ctex"
+uid="uid://dn6dcm16ayge3"
+path="res://.godot/imported/Indicator.png-654cd4009f14bfb471a00a97ae567c0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Unknown.png"
-dest_files=["res://.godot/imported/Unknown.png-9c77ca833653e5c490f0c7cfe4364e0c.ctex"]
+source_file="res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/assets/Indicator.png"
+dest_files=["res://.godot/imported/Indicator.png-654cd4009f14bfb471a00a97ae567c0c.ctex"]
 
 [params]
 
