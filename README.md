@@ -72,7 +72,7 @@ Abevol-OffScreenResourceIndicators/
 
 ## 许可证
 
-本项目采用 MIT 许可证 - 详情请参阅 LICENSE 文件
+本项目采用 GPL-3.0 许可证 - 详情请参阅 LICENSE 文件
 
 ## 致谢
 
