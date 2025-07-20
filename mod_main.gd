@@ -18,12 +18,14 @@ var _hook_manager: HookManager = null
 func _init() -> void:
 	ModLoaderLog.info("Init", LOG_NAME)
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(Constants.MOD_DIR)
+	extensions_dir_path = mod_dir_path.path_join("extensions")
 
 	install_script_extensions()
 	install_script_hook_files()
 
 	# 初始化钩子管理器
 	_hook_manager = HookManager.new()
+	_hook_manager.name = "HookManager"
 	add_child(_hook_manager)
 	_hook_manager.register_all_hooks()
 
@@ -31,15 +33,11 @@ func _init() -> void:
 
 
 func install_script_extensions() -> void:
-	extensions_dir_path = mod_dir_path.path_join("extensions")
-
 	ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/caves/Cave.gd"))
 	ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/map/chamber/Chamber.gd"))
 
 
 func install_script_hook_files() -> void:
-	extensions_dir_path = mod_dir_path.path_join("extensions")
-
 	ModLoaderMod.install_script_hooks(
 		"res://content/map/tile/Tile.gd", extensions_dir_path.path_join("content/map/tile/Tile.hooks.gd")
 	)
@@ -63,6 +61,7 @@ func _ready() -> void:
 	ModLoader.current_config_changed.connect(Callable(self, "_on_current_config_changed"))
 
 	_file_watcher = FileWatcher.new()
+	_file_watcher.name = "FileWatcher"
 	add_child(_file_watcher)
 	_file_watcher.start_watching(
 		ModLoaderConfig.get_current_config(Constants.MOD_DIR).save_path, Callable(self, "_on_config_file_modified")
