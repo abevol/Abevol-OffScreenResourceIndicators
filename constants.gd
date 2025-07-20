@@ -1,4 +1,3 @@
-class_name Constants
 extends Object
 
 const MOD_ID := "Abevol-OffScreenResourceIndicators"

@@ -1,5 +1,7 @@
 extends "res://content/caves/Cave.gd"
 
+const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
+
 static var LOG_NAME := Constants.MOD_ID + ":Cave"
 
 func print_children_names(node: Node) -> void:

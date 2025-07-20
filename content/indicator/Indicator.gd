@@ -1,5 +1,7 @@
 extends Node2D
 
+const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
+
 const Chamber = preload("res://content/map/chamber/Chamber.gd")
 
 const COBALT_CAVE_TEXTURE = preload(

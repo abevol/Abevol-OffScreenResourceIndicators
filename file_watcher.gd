@@ -1,4 +1,3 @@
-class_name FileWatcher
 extends Node
 
 var file_to_watch: String

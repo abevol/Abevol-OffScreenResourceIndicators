@@ -2,6 +2,10 @@ extends Node
 
 signal current_mod_config_changed(config: ModConfig)
 
+const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
+const HookManager = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/hook_manager.gd")
+const FileWatcher = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/file_watcher.gd")
+
 static var LOG_NAME := Constants.MOD_ID + ":Main"  # Name of the log channel
 var mod_dir_path := ""
 var extensions_dir_path := ""

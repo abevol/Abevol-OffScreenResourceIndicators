@@ -1,5 +1,6 @@
-class_name HookManager
 extends Node
+
+const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":HookManager"
 

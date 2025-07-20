@@ -1,5 +1,7 @@
 extends Object
 
+const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
+
 static var LOG_NAME := Constants.MOD_ID + ":Tile.hooks"
 
 
