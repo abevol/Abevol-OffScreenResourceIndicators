@@ -13,6 +13,9 @@ const IRON_TREE_CAVE_TEXTURE = preload(
 const MUSHROOM_CAVE_TEXTURE = preload(
 	"res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/assets/MushroomCave.png"
 )
+const WATER_CAVE_TEXTURE = preload(
+	"res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/assets/WaterCave.png"
+)
 const SEED_TEXTURE = preload("res://content/gadgets/mineraltree/seeddrop.png")
 const DRILLBOT_TEXTURE = preload("res://content/gadgets/drillbot/drillbot.png")
 const RELIC_CHAMBER_TEXTURE = preload("res://content/map/chamber/relic/artifact_socketed.png")
@@ -132,6 +135,12 @@ func init_data(data: Dictionary):
 				or not data["Iron4_taken"]
 				or not data["Iron5_taken"]
 			)
+		"WaterCave.tscn":
+			has_resource = (
+				not data["Water1_taken"]
+				or not data["Water2_taken"]
+				or not data["Water3_taken"]
+			)
 		"MushroomCave.tscn":
 			has_resource = data["hasMushroom"]
 		"BombCave.tscn":
@@ -194,6 +203,8 @@ func _ready():
 			icon.texture = COBALT_CAVE_TEXTURE
 		"IronTreeCave.tscn":
 			icon.texture = IRON_TREE_CAVE_TEXTURE
+		"WaterCave.tscn":
+			icon.texture = WATER_CAVE_TEXTURE
 		"MushroomCave.tscn":
 			icon.texture = MUSHROOM_CAVE_TEXTURE
 			add_to_group("unstyled")

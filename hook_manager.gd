@@ -45,6 +45,8 @@ func register_all_hooks() -> void:
 	ModLoaderMod.add_hook(useHitForCobalt, "res://content/caves/cobaltcave/Cobalt.gd", "useHit")
 	ModLoaderMod.add_hook(useHitForIron, "res://content/caves/treecave/Iron.gd", "useHit")
 	ModLoaderMod.add_hook(_processForIron, "res://content/caves/treecave/Iron.gd", "_process")
+	ModLoaderMod.add_hook(useHitForWater, "res://content/caves/watercave/Water.gd", "useHit")
+	ModLoaderMod.add_hook(_processForWater, "res://content/caves/watercave/Water.gd", "_process")
 
 
 # 获取资源实例的唯一标识符
@@ -110,6 +112,27 @@ func useHitForIron(chain: ModLoaderHookChain, keeper: Keeper) -> bool:
 	return result
 
 
+# 处理水洞穴
+func useHitForWater(chain: ModLoaderHookChain, keeper: Keeper) -> bool:
+	var result = chain.execute_next([keeper])
+	var resource_node: Node2D = chain.reference_object.get_parent()
+
+	var waters = [
+		resource_node.get_node_or_null("%Water1"),
+		resource_node.get_node_or_null("%Water2"),
+		resource_node.get_node_or_null("%Water3"),
+	]
+
+	var has_resource = false
+	for water in waters:
+		if water and not water.taken:
+			has_resource = true
+			break
+
+	update_resource_state(resource_node.get_parent().get_parent(), has_resource)
+	return result
+
+
 # 处理蘑菇洞穴的进程
 func _processForMushroomCave(chain: ModLoaderHookChain, delta):
 	chain.execute_next([delta])
@@ -132,6 +155,23 @@ func _processForIron(chain: ModLoaderHookChain, delta):
 
 	for iron in irons:
 		if iron and not iron.taken:
+			update_resource_state(resource_node.get_parent().get_parent(), true)
+			break
+
+
+# 处理水洞穴的进程
+func _processForWater(chain: ModLoaderHookChain, delta):
+	chain.execute_next([delta])
+	var resource_node: Node2D = chain.reference_object.get_parent()
+
+	var waters = [
+		resource_node.get_node_or_null("%Water1"),
+		resource_node.get_node_or_null("%Water2"),
+		resource_node.get_node_or_null("%Water3"),
+	]
+
+	for water in waters:
+		if water and not water.taken:
 			update_resource_state(resource_node.get_parent().get_parent(), true)
 			break
 
