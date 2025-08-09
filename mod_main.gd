@@ -7,6 +7,8 @@ const HookManager = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicat
 const FileWatcher = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/file_watcher.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":Main"  # Name of the log channel
+
+var show_debug_info := false
 var mod_dir_path := ""
 var extensions_dir_path := ""
 var translations_dir_path := ""
@@ -57,6 +59,9 @@ func _ready() -> void:
 	ModLoaderLog.info("Ready", LOG_NAME)
 	add_to_group("mod_init")
 
+	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
+	show_debug_info = config.data.show_debug_info
+
 	# Connect to current_config_changed signal
 	ModLoader.current_config_changed.connect(Callable(self, "_on_current_config_changed"))
 
@@ -75,6 +80,7 @@ func _on_config_file_modified(_path: String) -> void:
 func _on_current_config_changed(config: ModConfig) -> void:
 	# Check if the config of your mod has changed!
 	if config.mod_id == Constants.MOD_ID:
+		show_debug_info = config.data.show_debug_info
 		current_mod_config_changed.emit(config)
 
 

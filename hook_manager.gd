@@ -1,10 +1,12 @@
 extends Node
 
 const Chamber = preload("res://content/map/chamber/Chamber.gd")
+const ModMain = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/mod_main.gd")
 const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":HookManager"
 
+var mod_main: ModMain = null
 var mod_dir_path := ""
 var extensions_dir_path := ""
 
@@ -17,6 +19,10 @@ func _init():
 	ModLoaderLog.info("Init", LOG_NAME)
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(Constants.MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
+
+
+func _ready():
+	mod_main = get_node("/root/ModLoader/" + Constants.MOD_DIR)
 
 
 # 注册所有钩子
@@ -66,6 +72,8 @@ func update_resource_state(resource_node: Node, has_resource: bool) -> void:
 	var indicator = resource_node.get_node_or_null("Indicator")
 	if indicator != null:
 		indicator.has_resource = has_resource
+	else:
+		ModLoaderLog.error("Indicator not found in " + get_resource_id(resource_node), LOG_NAME)
 
 
 # 处理通用的资源使用
