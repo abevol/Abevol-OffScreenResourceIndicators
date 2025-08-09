@@ -172,6 +172,8 @@ func _ready():
 		sprite = parent.get_node_or_null("Background")
 	if sprite == null:
 		sprite = parent.get_node_or_null("Sprites/Sprite")
+	if sprite == null:
+		sprite = parent.get_node_or_null("CageSprite")
 
 	if sprite != null:
 		if sprite is Sprite2D:
@@ -257,10 +259,13 @@ func _process(_delta: float) -> void:
 		move_indicator()
 		indicator.show()
 
-	var parent = get_parent()
-	var sceneFile = parent.scene_file_path.get_file()
-	if parent is Chamber:
-		title.text = (sceneFile + ", State: " + parent.State.find_key(parent.currentState))
+	if title.visible:
+		var parent = get_parent()
+		var sceneFile = parent.scene_file_path.get_file()
+		if parent is Tile:
+			title.text = sceneFile + ":" + str(parent.type)
+		elif parent is Chamber:
+			title.text = (sceneFile + ", State: " + parent.State.find_key(parent.currentState))
 
 
 func move_indicator():

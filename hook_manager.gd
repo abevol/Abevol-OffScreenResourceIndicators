@@ -53,6 +53,7 @@ func register_all_hooks() -> void:
 	ModLoaderMod.add_hook(_processForIron, "res://content/caves/treecave/Iron.gd", "_process")
 	ModLoaderMod.add_hook(useHitForWater, "res://content/caves/watercave/Water.gd", "useHit")
 	ModLoaderMod.add_hook(_processForWater, "res://content/caves/watercave/Water.gd", "_process")
+	ModLoaderMod.add_hook(setType, "res://content/map/tile/Tile.gd", "setType")
 
 
 # 获取资源实例的唯一标识符
@@ -196,3 +197,16 @@ func onUsedForRelicSwitchChamber(chain: ModLoaderHookChain):
 	var resource_node := chain.reference_object
 	if resource_node.used:
 		update_resource_state(resource_node, false)
+
+
+func setType(chain: ModLoaderHookChain, type: String):
+	chain.execute_next([type])
+	var resource_node := chain.reference_object
+	update_resource_state(resource_node, type != "dirt")
+	if mod_main.show_debug_info:
+		ModLoaderLog.debug(
+			(
+				"setType: " + get_resource_id(resource_node)
+				+ ", type: " + type
+			), LOG_NAME
+		)
