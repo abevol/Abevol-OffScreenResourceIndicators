@@ -67,14 +67,11 @@ func update_resource_state(resource_node: Node, has_resource: bool) -> void:
 	if resource_id.is_empty():
 		return
 
-	resource_states[resource_id] = has_resource
-
 	# 通知相关的指示器更新状态
 	var indicator = resource_node.get_node_or_null("Indicator")
 	if indicator != null:
 		indicator.has_resource = has_resource
-	else:
-		ModLoaderLog.error("Indicator not found in " + get_resource_id(resource_node), LOG_NAME)
+		resource_states[resource_id] = has_resource
 
 
 # 处理通用的资源使用
@@ -201,12 +198,8 @@ func onUsedForRelicSwitchChamber(chain: ModLoaderHookChain):
 
 func setType(chain: ModLoaderHookChain, type: String):
 	chain.execute_next([type])
-	var resource_node := chain.reference_object
-	update_resource_state(resource_node, type != "dirt")
-	if mod_main.show_debug_info:
-		ModLoaderLog.debug(
-			(
-				"setType: " + get_resource_id(resource_node)
-				+ ", type: " + type
-			), LOG_NAME
-		)
+
+	if type == "dirt":
+		var resource_node := chain.reference_object
+		update_resource_state(resource_node, false)
+
