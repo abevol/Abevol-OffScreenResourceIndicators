@@ -22,6 +22,7 @@ func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(Constants.MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 
+	init_config()
 	install_script_extensions()
 	install_script_hook_files()
 
@@ -32,6 +33,21 @@ func _init() -> void:
 	_hook_manager.register_all_hooks()
 
 	# add_translations()
+
+
+func init_config() -> void:
+	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
+	show_debug_info = config.data.show_debug_info
+
+	# Connect to current_config_changed signal
+	ModLoader.current_config_changed.connect(Callable(self, "_on_current_config_changed"))
+
+	_file_watcher = FileWatcher.new()
+	_file_watcher.name = "FileWatcher"
+	add_child(_file_watcher)
+	_file_watcher.start_watching(
+		ModLoaderConfig.get_current_config(Constants.MOD_DIR).save_path, Callable(self, "_on_config_file_modified")
+	)
 
 
 func install_script_extensions() -> void:
@@ -58,19 +74,6 @@ func add_translations() -> void:
 func _ready() -> void:
 	ModLoaderLog.info("Ready", LOG_NAME)
 	add_to_group("mod_init")
-
-	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
-	show_debug_info = config.data.show_debug_info
-
-	# Connect to current_config_changed signal
-	ModLoader.current_config_changed.connect(Callable(self, "_on_current_config_changed"))
-
-	_file_watcher = FileWatcher.new()
-	_file_watcher.name = "FileWatcher"
-	add_child(_file_watcher)
-	_file_watcher.start_watching(
-		ModLoaderConfig.get_current_config(Constants.MOD_DIR).save_path, Callable(self, "_on_config_file_modified")
-	)
 
 
 func _on_config_file_modified(_path: String) -> void:

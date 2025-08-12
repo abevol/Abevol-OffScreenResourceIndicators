@@ -252,7 +252,7 @@ func _process(_delta: float) -> void:
 	if (
 		notifier.is_on_screen()
 		|| !has_resource
-		|| (global_position.distance_to(borders.get_center()) > borders.get_center().distance_to(borders.end) * 3)
+		|| (global_position.distance_to(borders.get_center()) > borders.size.x * 3)
 	):
 		indicator.hide()
 	else:

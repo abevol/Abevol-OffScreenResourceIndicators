@@ -16,8 +16,8 @@ func _ready():
 		ModLoaderLog.debug(
 			(
 				"_ready: " + str(coord)
-				+ ", sceneFile: " + sceneFile
-				+ ", State: " + State.find_key(currentState)
+				+ ", scene: " + sceneFile
+				+ ", state: " + State.find_key(currentState)
 				+ ", visible: " + str(visible)
 				+ ", type: " + str(type)
 			),
@@ -37,8 +37,8 @@ func deserialize(data: Dictionary):
 		ModLoaderLog.debug(
 			(
 				"deserialize: " + str(coord)
-				+ ", sceneFile: " + sceneFile
-				+ ", State: " + State.find_key(currentState)
+				+ ", scene: " + sceneFile
+				+ ", state: " + State.find_key(currentState)
 				+ ", visible: " + str(visible)
 				+ ", type: " + str(type)
 			),
