@@ -23,7 +23,8 @@ func _init() -> void:
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 
 	init_config()
-	install_script_extensions()
+	# add_translations()
+	# install_script_extensions()
 	install_script_hook_files()
 
 	# 初始化钩子管理器
@@ -31,8 +32,6 @@ func _init() -> void:
 	_hook_manager.name = "HookManager"
 	add_child(_hook_manager)
 	_hook_manager.register_all_hooks()
-
-	# add_translations()
 
 
 func init_config() -> void:
@@ -51,18 +50,25 @@ func init_config() -> void:
 
 
 func install_script_extensions() -> void:
-	ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/caves/Cave.gd"))
-	ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/map/chamber/Chamber.gd"))
+	pass
+	# ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/caves/Cave.gd"))
+	# ModLoaderMod.install_script_extension(extensions_dir_path.path_join("content/map/chamber/Chamber.gd"))
 
 
 func install_script_hook_files() -> void:
-	ModLoaderMod.install_script_hooks(
-		"res://content/map/tile/Tile.gd", extensions_dir_path.path_join("content/map/tile/Tile.hooks.gd")
-	)
-	ModLoaderMod.install_script_hooks(
-		"res://content/shared/drops/Carryable.gd",
-		extensions_dir_path.path_join("content/shared/drops/Carryable.hooks.gd")
-	)
+	var scripts = [
+		"res://content/caves/Cave.gd",
+		"res://content/map/chamber/Chamber.gd",
+		"res://content/map/tile/Tile.gd",
+		"res://content/shared/drops/Carryable.gd"
+	]
+
+	for script_path in scripts:
+		var basename = script_path.get_basename()
+		var relative_path = basename.trim_prefix("res://")
+		var hooks_path = extensions_dir_path.path_join(relative_path + ".hooks.gd")
+		ModLoaderLog.info("Install script hooks: " + script_path + " -> " + hooks_path, LOG_NAME)
+		ModLoaderMod.install_script_hooks(script_path, hooks_path)
 
 
 func add_translations() -> void:
