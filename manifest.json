@@ -2,7 +2,7 @@
 	"name": "OffScreenResourceIndicators",
 	"namespace": "Abevol",
 	"version_number": "1.1.3",
-	"website_url": "https://github.com/abevol/OffScreenResourceIndicators",
+	"website_url": "https://github.com/abevol/Abevol-OffScreenResourceIndicators",
 	"dependencies": [],
 	"description": "Adds off screen resource indicators.\nThis is the V4-compatible version.",
 	"extra": {

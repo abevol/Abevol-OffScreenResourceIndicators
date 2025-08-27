@@ -41,7 +41,6 @@
 
 本模组使用 Godot 的脚本扩展和钩子系统实现功能：
 
-- 使用 `HookManager` 集中管理所有钩子回调
 - 通过脚本扩展为原游戏对象添加指示器功能
 - 使用资源状态跟踪系统确保指示器正确显示
 
@@ -51,7 +50,6 @@
 Abevol-OffScreenResourceIndicators/
 ├── manifest.json         # 模组清单文件
 ├── mod_main.gd           # 模组主入口脚本
-├── hook_manager.gd       # 钩子管理器
 ├── .gdlintrc             # GDScript 代码风格检查配置
 ├── file_watcher.gd       # 文件监视器
 ├── constants.gd          # 常量定义
