@@ -8,8 +8,8 @@ static var LOG_NAME := Constants.MOD_ID + ":ConfigWatcher"  # Name of the log ch
 var _file_watcher: FileWatcher = null
 
 
-func _init() -> void:
-	ModLoaderLog.info("Init", LOG_NAME)
+func _ready() -> void:
+	ModLoaderLog.info("Ready", LOG_NAME)
 
 	_file_watcher = FileWatcher.new()
 	_file_watcher.name = "FileWatcher"
