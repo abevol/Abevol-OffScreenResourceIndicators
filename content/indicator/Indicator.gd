@@ -32,8 +32,10 @@ var has_resource: bool = true
 @onready var notifier = $VisibilityNotifier2D
 
 
-func _on_current_mod_config_changed(config: ModConfig) -> void:
-	apply_config(config)
+func _on_current_config_changed(config: ModConfig) -> void:
+	if config.mod_id == Constants.MOD_ID:
+		ModLoaderLog.info("Config changed: " + config.mod_id, LOG_NAME)
+		apply_config(config)
 
 
 func apply_config(config: ModConfig) -> void:
@@ -157,50 +159,59 @@ func init_data(data: Dictionary):
 			has_resource = data["hasEgg"]
 
 
+# 提取 Sprite2D 的当前帧贴图
+func get_sprite2d_frame_texture(sprite: Sprite2D) -> Texture2D:
+	if sprite.hframes > 1 or sprite.vframes > 1:
+		var texture = sprite.texture
+		var frame_width = texture.get_width() / sprite.hframes
+		var frame_height = texture.get_height() / sprite.vframes
+		var frame_x = sprite.frame_coords.x * frame_width
+		var frame_y = sprite.frame_coords.y * frame_height
+
+		var atlas_texture := AtlasTexture.new()
+		atlas_texture.atlas = texture
+		atlas_texture.region = Rect2(frame_x, frame_y, frame_width, frame_height)
+		return atlas_texture
+	return sprite.texture
+
+
 func _ready():
 	apply_config(ModLoaderConfig.get_current_config(Constants.MOD_DIR))
-	var main = get_node("/root/ModLoader/" + Constants.MOD_DIR)
-	main.current_mod_config_changed.connect(_on_current_mod_config_changed)
+	ModLoader.current_config_changed.connect(_on_current_config_changed)
 
 	var parent = get_parent()
-	var sprite = parent.get_node_or_null("Sprite")
-	if sprite == null:
-		sprite = parent.get_node_or_null("Sprite2D")
-	if sprite == null:
-		sprite = parent.get_node_or_null("ResourceSprite")
-	if sprite == null:
-		sprite = parent.get_node_or_null("Background")
-	if sprite == null:
-		sprite = parent.get_node_or_null("Sprites/Sprite")
-	if sprite == null:
-		sprite = parent.get_node_or_null("CageSprite")
+	var candidate_paths = [
+		"SocketedGizmo",
+		"Sprite",
+		"Sprite2D",
+		"ResourceSprite",
+		"Background",
+		"Sprites/Sprite",
+		"CageSprite"
+	]
+
+	var sprite: Node = null
+	for path in candidate_paths:
+		sprite = parent.get_node_or_null(path)
+		if sprite != null:
+			break
 
 	if sprite != null:
 		if sprite is Sprite2D:
-			if sprite.hframes > 1 || sprite.vframes > 1:
-				# 处理精灵表
-				var texture = sprite.texture
-				var frame_width = texture.get_width() / sprite.hframes
-				var frame_height = texture.get_height() / sprite.vframes
-				var frame_x = sprite.frame_coords.x * frame_width
-				var frame_y = sprite.frame_coords.y * frame_height
-				var atlas_texture = AtlasTexture.new()
-				atlas_texture.atlas = texture
-				atlas_texture.region = Rect2(frame_x, frame_y, frame_width, frame_height)
-				icon.texture = atlas_texture
-			else:
-				icon.texture = sprite.texture
+			icon.texture = get_sprite2d_frame_texture(sprite)
 		elif sprite is AnimatedSprite2D:
-			icon.texture = sprite.get_sprite_frames().get_frame_texture(sprite.animation, sprite.get_frame())
+			icon.texture = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 
-	var sceneFile = parent.scene_file_path.get_file()
-	match sceneFile:
+	var scene_file = parent.scene_file_path.get_file()
+	match scene_file:
 		"Seed.tscn":
 			icon.texture = SEED_TEXTURE
 		"SeedCave.tscn":
 			icon.texture = SEED_TEXTURE
 		"Drillbot.tscn":
 			icon.texture = DRILLBOT_TEXTURE
+		"DroneCave.tscn":
+			icon.add_to_group("unstyled")
 		"CobaltCave.tscn":
 			icon.texture = COBALT_CAVE_TEXTURE
 		"IronTreeCave.tscn":
@@ -209,11 +220,15 @@ func _ready():
 			icon.texture = WATER_CAVE_TEXTURE
 		"MushroomCave.tscn":
 			icon.texture = MUSHROOM_CAVE_TEXTURE
-			add_to_group("unstyled")
+			icon.add_to_group("unstyled")
+		"PortalCave.tscn":
+			icon.add_to_group("unstyled")
 		"RelicChamber.tscn":
 			icon.texture = RELIC_CHAMBER_TEXTURE
 			# parent.connect("relic_taken", Callable(self, "deactivate"))
 			# visible = not Data.ofOr("map.relictaken", false)
+		"ScannerCave.tscn":
+			icon.add_to_group("unstyled")
 
 	var alphaMap = parent.get_node_or_null("AlphaMap") as Sprite2D
 	if alphaMap != null:
@@ -231,13 +246,13 @@ func _ready():
 	# !判断类型只能用is，不能用match
 	if parent is Carryable:
 		# title.visible = false
-		title.text = sceneFile
+		title.text = scene_file
 	elif parent is Tile:
-		title.text = sceneFile + ":" + str(parent.type)
+		title.text = scene_file + ":" + str(parent.type)
 	elif parent is Chamber:
-		title.text = (sceneFile + ", State: " + parent.State.find_key(parent.currentState))
+		title.text = (scene_file + ", State: " + parent.State.find_key(parent.currentState))
 	else:
-		title.text = sceneFile
+		title.text = scene_file
 
 	# ModLoaderLog.debug("Scene file: " + parent.scene_file_path.get_file(), LOG_NAME)
 	# print_children_names(parent)

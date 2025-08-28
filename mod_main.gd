@@ -1,23 +1,20 @@
 extends Node
 
-signal current_mod_config_changed(config: ModConfig)
-
 const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
-const FileWatcher = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/file_watcher.gd")
+const ConfigWatcher = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/config_watcher.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":Main"  # Name of the log channel
-
-var show_debug_info := true
 
 var mod_dir_path := ""
 var extensions_dir_path := ""
 var translations_dir_path := ""
 
-var _file_watcher: FileWatcher = null
+var _config_watcher: ConfigWatcher = null
 
 
 func _init() -> void:
 	ModLoaderLog.info("Init", LOG_NAME)
+
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(Constants.MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 	translations_dir_path = mod_dir_path.path_join("translations")
@@ -35,11 +32,11 @@ func install_script_extensions() -> void:
 		"res://content/caves/dragoncave/LunarNewYearDragonCave.gd",
 		"res://content/caves/dronecave/DroneCave.gd",
 		"res://content/caves/helmetextensioncave/HelmetCave.gd",
-		"res://content/caves/mushroomcave/MushroomCave.gd",
+		# "res://content/caves/mushroomcave/MushroomCave.gd",
 		"res://content/caves/scannercave/ScannerCave.gd",
 		"res://content/caves/seedcave/SeedCave.gd",
-		"res://content/caves/treecave/Iron.gd",
-		"res://content/caves/watercave/Water.gd",
+		# "res://content/caves/treecave/Iron.gd",
+		# "res://content/caves/watercave/Water.gd",
 		"res://content/map/chamber/Chamber.gd",
 		# "res://content/map/chamber/gadget/GadgetChamber.gd",
 		# "res://content/map/chamber/gift/GiftChamber.gd",
@@ -78,37 +75,10 @@ func add_translations() -> void:
 func _ready() -> void:
 	ModLoaderLog.info("Ready", LOG_NAME)
 	add_to_group("mod_init")
-	init_config()
 
-
-func init_config() -> void:
-	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
-	show_debug_info = config.data.show_debug_info
-
-	# Connect to current_config_changed signal
-	ModLoader.current_config_changed.connect(_on_current_config_changed)
-
-	_file_watcher = FileWatcher.new()
-	add_child(_file_watcher)
-	var config_file_path = ModLoaderConfig.get_current_config(Constants.MOD_DIR).save_path
-	ModLoaderLog.info("Config file path: " + config_file_path, LOG_NAME)
-	_file_watcher.start_watching(config_file_path, _on_config_file_modified)
-
-
-func _on_config_file_modified(_path: String) -> void:
-	ModLoaderLog.info("Config file modified: " + _path, LOG_NAME)
-	ModLoaderConfig.refresh_current_configs()
-	# var current_config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
-	# ModLoaderConfig.refresh_config_data(current_config)
-	# ModLoader.current_config_changed.emit(current_config)
-
-
-func _on_current_config_changed(config: ModConfig) -> void:
-	ModLoaderLog.info("Config changed: " + config.mod_id, LOG_NAME)
-	# Check if the config of your mod has changed!
-	if config.mod_id == Constants.MOD_ID:
-		show_debug_info = config.data.show_debug_info
-		current_mod_config_changed.emit(config)
+	_config_watcher = ConfigWatcher.new()
+	_config_watcher.name = "ConfigWatcher"
+	add_child(_config_watcher)
 
 
 func modInit():

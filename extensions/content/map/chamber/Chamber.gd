@@ -1,18 +1,15 @@
 extends "res://content/map/chamber/Chamber.gd"
 
-const ModMain = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/mod_main.gd")
 const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
 const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":Chamber"
 
-var mod_main: ModMain = null
-
 
 func _ready():
 	super()
-	mod_main = get_node("/root/ModLoader/" + Constants.MOD_DIR)
-	if mod_main.show_debug_info:
+	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
+	if config.data.show_debug_info:
 		var sceneFile: String = scene_file_path.get_file()
 		ModLoaderLog.debug(
 			(
@@ -34,7 +31,8 @@ func _ready():
 func deserialize(data: Dictionary):
 	super(data)
 	var sceneFile: String = scene_file_path.get_file()
-	if mod_main.show_debug_info:
+	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
+	if config.data.show_debug_info:
 		ModLoaderLog.debug(
 			(
 				"deserialize: " + str(coord)
@@ -61,8 +59,6 @@ func deserialize(data: Dictionary):
 # 5 - res://systems/input/InputSystem.gd:127 - at function:_unhandled_irput
 func useHit(keeper:Keeper) -> bool:
 	var result = super(keeper)
-	var sceneFile: String = scene_file_path.get_file()
-	ModLoaderLog.debug("useHit: " + str(result) + ", " + sceneFile, LOG_NAME)
 	if result:
 		Global.update_indicator_state(self, false)
 	return result
