@@ -1,7 +1,7 @@
 extends "res://content/map/chamber/Chamber.gd"
 
 const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
-const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
+const Indicator = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":Chamber"
 
@@ -57,7 +57,7 @@ func deserialize(data: Dictionary):
 func useHit(keeper:Keeper) -> bool:
 	var result = super(keeper)
 	if result:
-		Global.update_indicator_state(self, false)
+		Indicator.update_indicator_state(self, false)
 	return result
 
 # 栈帧

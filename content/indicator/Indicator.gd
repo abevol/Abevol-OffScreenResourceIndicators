@@ -329,3 +329,23 @@ func move_indicator():
 
 func _on_visibility_notifier_2d_screen_exited():
 	pass  # Replace with function body.
+
+
+# 更新指示器的资源状态
+func update_resource_state(new_state: bool) -> void:
+	if has_resource != new_state:
+		has_resource = new_state
+
+		var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
+		if config.data.show_debug_info:
+			var parent = get_parent()
+			var scene_file = parent.scene_file_path.get_file()
+			ModLoaderLog.debug("update_resource_state: " + "scene: " + scene_file + ", has_resource: " + str(has_resource), LOG_NAME)
+
+
+# 静态辅助函数：为指定节点更新指示器状态
+# 这个函数提供了简洁的调用接口，同时保持了面向对象的设计
+static func update_indicator_state(resource_node: Node, new_state: bool) -> void:
+	var indicator = resource_node.get_node_or_null("Indicator")
+	if indicator != null:
+		indicator.update_resource_state(new_state)

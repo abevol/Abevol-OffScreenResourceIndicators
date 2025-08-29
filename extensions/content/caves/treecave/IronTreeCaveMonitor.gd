@@ -1,6 +1,6 @@
 extends Node
 
-const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
+const Indicator = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.gd")
 
 
 func _process(_delta: float) -> void:
@@ -20,4 +20,4 @@ func _process(_delta: float) -> void:
 			has_resource = true
 			break
 
-	Global.update_indicator_state(resource_node, has_resource)
+	Indicator.update_indicator_state(resource_node, has_resource)

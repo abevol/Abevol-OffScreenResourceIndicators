@@ -1,7 +1,7 @@
 extends Object
 
 const Constants = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/constants.gd")
-const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
+const Indicator = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.gd")
 
 static var LOG_NAME := Constants.MOD_ID + ":Tile.hooks"
 
@@ -26,4 +26,4 @@ func setType(chain: ModLoaderHookChain, type: String):
 	chain.execute_next([type])
 	if type == "dirt":
 		var resource_node := chain.reference_object
-		Global.update_indicator_state(resource_node, false)
+		Indicator.update_indicator_state(resource_node, false)

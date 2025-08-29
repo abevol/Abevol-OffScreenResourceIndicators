@@ -1,6 +1,6 @@
 extends "res://content/caves/cobaltcave/Cobalt.gd"
 
-const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
+const Indicator = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.gd")
 
 # 处理钴矿洞穴
 func useHit(keeper:Keeper) -> bool:
@@ -12,5 +12,6 @@ func useHit(keeper:Keeper) -> bool:
 	var has_cobalt1 = cobalt1 and not cobalt1.is_queued_for_deletion()
 	var has_cobalt2 = cobalt2 and not cobalt2.is_queued_for_deletion()
 
-	Global.update_indicator_state(resource_node.get_parent().get_parent(), has_cobalt1 or has_cobalt2)
+	var indicator_parent = resource_node.get_parent().get_parent()
+	Indicator.update_indicator_state(indicator_parent, has_cobalt1 or has_cobalt2)
 	return result

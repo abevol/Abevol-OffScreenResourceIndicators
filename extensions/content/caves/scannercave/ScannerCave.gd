@@ -1,8 +1,8 @@
 extends "res://content/caves/scannercave/ScannerCave.gd"
 
-const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/global.gd")
+const Indicator = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.gd")
 
 
 func useHit(keeper: Keeper) -> bool:
-	Global.update_indicator_state(self, false)
+	Indicator.update_indicator_state(self, false)
 	return super(keeper)
