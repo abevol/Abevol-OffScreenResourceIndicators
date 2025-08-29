@@ -6,6 +6,7 @@ const Global = preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/g
 static var LOG_NAME := Constants.MOD_ID + ":Chamber"
 
 
+# 给密室添加指示器
 func _ready():
 	super()
 	var config = ModLoaderConfig.get_current_config(Constants.MOD_DIR)
@@ -28,6 +29,7 @@ func _ready():
 	add_child(instance)
 
 
+# 在读取存档后更新指示器资源状态
 func deserialize(data: Dictionary):
 	super(data)
 	var sceneFile: String = scene_file_path.get_file()
@@ -50,6 +52,14 @@ func deserialize(data: Dictionary):
 	else:
 		ModLoaderLog.error("Indicator not found in " + sceneFile, LOG_NAME)
 
+
+# 当玩家拾取密室物品时更新指示器资源状态
+func useHit(keeper:Keeper) -> bool:
+	var result = super(keeper)
+	if result:
+		Global.update_indicator_state(self, false)
+	return result
+
 # 栈帧
 # 0 - res://content/map/chamber/Chamber.gd:133 - at function: useHit
 # 1 - res://content/shared/Usable.gd:83 - at function: useHit
@@ -57,8 +67,3 @@ func deserialize(data: Dictionary):
 # 3 - res://content/keeper/KeeperInputProcessor.gd:126 - at function: bouttonEvent
 # 4 - res://systems/input/InputProcessor.gd:66 - at function: handle
 # 5 - res://systems/input/InputSystem.gd:127 - at function:_unhandled_irput
-func useHit(keeper:Keeper) -> bool:
-	var result = super(keeper)
-	if result:
-		Global.update_indicator_state(self, false)
-	return result

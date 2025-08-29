@@ -9,6 +9,7 @@ const WaterCaveMonitor = preload("res://mods-unpacked/Abevol-OffScreenResourceIn
 static var LOG_NAME := Constants.MOD_ID + ":Cave"
 
 
+# 给洞穴添加指示器和资源监视器
 func _ready(chain: ModLoaderHookChain):
 	chain.execute_next()
 	var this := chain.reference_object as Cave
@@ -46,6 +47,7 @@ func _ready(chain: ModLoaderHookChain):
 			this.add_child(monitor)
 
 
+# 在读取存档后更新指示器资源状态
 func deserialize(chain: ModLoaderHookChain, data: Dictionary):
 	chain.execute_next([data])
 	var this := chain.reference_object as Cave

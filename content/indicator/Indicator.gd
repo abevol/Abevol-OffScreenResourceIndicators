@@ -225,8 +225,6 @@ func _ready():
 			icon.add_to_group("unstyled")
 		"RelicChamber.tscn":
 			icon.texture = RELIC_CHAMBER_TEXTURE
-			# parent.connect("relic_taken", Callable(self, "deactivate"))
-			# visible = not Data.ofOr("map.relictaken", false)
 		"ScannerCave.tscn":
 			icon.add_to_group("unstyled")
 
@@ -253,9 +251,6 @@ func _ready():
 		title.text = (scene_file + ", State: " + parent.State.find_key(parent.currentState))
 	else:
 		title.text = scene_file
-
-	# ModLoaderLog.debug("Scene file: " + parent.scene_file_path.get_file(), LOG_NAME)
-	# print_children_names(parent)
 
 	Style.init(self)
 

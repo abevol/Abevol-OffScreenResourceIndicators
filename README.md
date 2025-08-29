@@ -51,6 +51,7 @@ Abevol-OffScreenResourceIndicators/
 ├── manifest.json         # 模组清单文件
 ├── mod_main.gd           # 模组主入口脚本
 ├── .gdlintrc             # GDScript 代码风格检查配置
+├── config_watcher.gd     # 配置文件监视器
 ├── file_watcher.gd       # 文件监视器
 ├── constants.gd          # 常量定义
 ├── content/              # 模组内容

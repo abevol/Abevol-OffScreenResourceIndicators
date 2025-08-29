@@ -1,6 +1,7 @@
 extends Object
 
 
+# 给可携带物品添加指示器
 func _ready(chain: ModLoaderHookChain) -> void:
 	var instance = (
 		preload("res://mods-unpacked/Abevol-OffScreenResourceIndicators/content/indicator/Indicator.tscn").instantiate()
